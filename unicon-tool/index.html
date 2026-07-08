@@ -1,0 +1,1388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Unicon – Unicode to Favicon · Free Converter</title>
+    <meta name="description" content="Convert any Unicode symbol, emoji, or glyph into a custom favicon. Download PNG, ICO, or SVG with full transparency support." />
+    <link rel="canonical" href="https://unicon.app" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Jura:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+    <style>
+        /* ----- reset & base ----- */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Jura', 'Segoe UI', sans-serif;
+            background: #f3ede7;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            padding: 24px 20px 60px;
+            color: #2c2a28;
+            font-weight: 400;
+            letter-spacing: 0.02em;
+        }
+
+        /* ----- main container (boxy, creamy) ----- */
+        .app {
+            max-width: 820px;
+            width: 100%;
+            background: #fcf9f6;
+            border: 1px solid #e2dad2;
+            border-radius: 6px;
+            padding: 32px 32px 40px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.02), 0 1px 4px rgba(0, 0, 0, 0.02);
+        }
+
+        /* ----- header (hero-ish) ----- */
+        .hero {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 4px 12px;
+            border-bottom: 1px solid #e8e0d8;
+            padding-bottom: 14px;
+            margin-bottom: 4px;
+        }
+
+        .hero-left {
+            display: flex;
+            align-items: baseline;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .hero h1 {
+            font-size: 30px;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: #1e1c1a;
+        }
+
+        .hero .badge {
+            font-weight: 300;
+            font-size: 15px;
+            color: #7a7168;
+            letter-spacing: 0.03em;
+            background: #f0e9e2;
+            padding: 2px 12px;
+            border-radius: 20px;
+            border: 1px solid #e2dad2;
+        }
+
+        .hero .version {
+            font-weight: 300;
+            font-size: 12px;
+            color: #9a8f84;
+        }
+
+        .sub {
+            font-weight: 300;
+            font-size: 15px;
+            color: #6b6259;
+            border-left: 2px solid #d6ccc2;
+            padding-left: 16px;
+            margin: 10px 0 22px 0;
+            line-height: 1.5;
+        }
+
+        /* ----- feature badges ----- */
+        .feature-strip {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px 18px;
+            margin: 6px 0 20px 0;
+            font-size: 12px;
+            font-weight: 300;
+            color: #6b6259;
+            letter-spacing: 0.03em;
+        }
+
+        .feature-strip span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .feature-strip .dot {
+            display: inline-block;
+            width: 4px;
+            height: 4px;
+            background: #bdb0a4;
+            border-radius: 50%;
+        }
+
+        /* ----- form grid ----- */
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px 18px;
+            margin-top: 4px;
+        }
+
+        .field {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .field label {
+            font-weight: 600;
+            font-size: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #5f554a;
+        }
+
+        .field label .hint {
+            font-weight: 300;
+            text-transform: none;
+            color: #9a8f84;
+            font-size: 9px;
+            letter-spacing: 0.02em;
+        }
+
+        .field input[type="text"],
+        .field select {
+            padding: 8px 12px;
+            border: 1px solid #ddd4ca;
+            border-radius: 4px;
+            font-family: 'Jura', sans-serif;
+            font-size: 15px;
+            font-weight: 400;
+            background: #fefcf9;
+            transition: border 0.15s, box-shadow 0.15s;
+            outline: none;
+            width: 100%;
+            color: #2c2a28;
+        }
+
+        .field input[type="text"]:focus,
+        .field select:focus {
+            border-color: #b2a69a;
+            box-shadow: 0 0 0 3px rgba(160, 140, 125, 0.08);
+        }
+
+        .field input[type="color"] {
+            width: 100%;
+            height: 38px;
+            padding: 2px;
+            border: 1px solid #ddd4ca;
+            border-radius: 4px;
+            background: #fefcf9;
+            cursor: pointer;
+        }
+
+        .field input[type="color"]:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            filter: grayscale(0.6);
+        }
+
+        .field input[type="range"] {
+            width: 100%;
+            accent-color: #8a7b6e;
+            background: transparent;
+            cursor: pointer;
+            margin: 2px 0;
+        }
+
+        .field input[type="range"]:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .range-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .range-row span {
+            font-size: 13px;
+            font-weight: 300;
+            color: #6b6259;
+            min-width: 32px;
+            text-align: right;
+        }
+
+        .opacity-label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 9px;
+            color: #7a7168;
+            font-weight: 300;
+            letter-spacing: 0.02em;
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+
+        .flex-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 8px 12px;
+        }
+
+        .flex-row .field {
+            flex: 1 1 120px;
+        }
+
+        .checkbox-wrap {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 400;
+            font-size: 13px;
+            color: #3d3732;
+            cursor: pointer;
+            padding: 4px 0;
+        }
+
+        .checkbox-wrap input[type="checkbox"] {
+            width: 17px;
+            height: 17px;
+            accent-color: #8a7b6e;
+            margin: 0;
+            border: 1px solid #ccc2b8;
+            border-radius: 2px;
+            cursor: pointer;
+        }
+
+        /* color presets row */
+        .preset-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            align-items: center;
+            margin-top: 2px;
+        }
+
+        .preset-swatch {
+            width: 28px;
+            height: 28px;
+            border-radius: 4px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: border 0.15s, transform 0.1s;
+            flex-shrink: 0;
+        }
+
+        .preset-swatch:hover {
+            transform: scale(1.08);
+            border-color: #b2a69a;
+        }
+
+        .preset-swatch.active {
+            border-color: #2c2a28;
+        }
+
+        .preset-label {
+            font-size: 9px;
+            font-weight: 400;
+            color: #7a7168;
+            letter-spacing: 0.04em;
+            margin-right: 4px;
+        }
+
+        /* ----- preview section (with checkerboard for transparency) ----- */
+        .preview-section {
+            margin: 20px 0 18px;
+            display: flex;
+            align-items: center;
+            gap: 28px;
+            flex-wrap: wrap;
+            background: #f6f0ea;
+            border: 1px solid #e5ddd5;
+            border-radius: 4px;
+            padding: 14px 22px;
+            position: relative;
+        }
+
+        .preview-canvas-wrap {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #fcf9f6;
+            border-radius: 4px;
+            padding: 6px;
+            border: 1px solid #e2dad2;
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        /* checkerboard overlay for transparency */
+        .preview-canvas-wrap.transparent-mode::before {
+            content: '';
+            position: absolute;
+            inset: 6px;
+            border-radius: 2px;
+            background-image:
+                linear-gradient(45deg, #d0c8c0 25%, transparent 25%),
+                linear-gradient(-45deg, #d0c8c0 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #d0c8c0 75%),
+                linear-gradient(-45deg, transparent 75%, #d0c8c0 75%);
+            background-size: 16px 16px;
+            background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+            opacity: 0.25;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .preview-canvas-wrap.transparent-mode canvas {
+            position: relative;
+            z-index: 1;
+        }
+
+        #previewCanvas {
+            display: block;
+            width: 80px;
+            height: 80px;
+            image-rendering: crisp-edges;
+            border-radius: 2px;
+        }
+
+        .preview-meta {
+            display: flex;
+            flex-direction: column;
+            gap: 0px;
+            flex: 1;
+        }
+
+        .preview-meta .symbol-big {
+            font-size: 36px;
+            line-height: 1.1;
+            font-weight: 300;
+            color: #282420;
+        }
+
+        .preview-meta .meta-detail {
+            font-size: 13px;
+            font-weight: 300;
+            color: #6b6259;
+            letter-spacing: 0.02em;
+        }
+
+        .preview-meta .warning {
+            font-size: 12px;
+            font-weight: 400;
+            color: #b85a3a;
+            margin-top: 2px;
+            display: none;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .preview-meta .warning.visible {
+            display: flex;
+        }
+
+        /* ----- buttons ----- */
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 9px 18px;
+            border: 1px solid #d6ccc2;
+            border-radius: 4px;
+            font-family: 'Jura', sans-serif;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 0.03em;
+            background: #fcf9f6;
+            color: #3d3732;
+            cursor: pointer;
+            transition: all 0.15s;
+            text-decoration: none;
+            flex: 1 0 auto;
+            min-width: 90px;
+        }
+
+        .btn:hover {
+            background: #f3ede7;
+            border-color: #bdb0a4;
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.02);
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .btn-primary {
+            background: #2c2a28;
+            border-color: #2c2a28;
+            color: #fcf9f6;
+        }
+        .btn-primary:hover {
+            background: #1f1d1b;
+            border-color: #1f1d1b;
+        }
+
+        .btn-success {
+            background: #4f6b5a;
+            border-color: #4f6b5a;
+            color: #fcf9f6;
+        }
+        .btn-success:hover {
+            background: #3f5a49;
+            border-color: #3f5a49;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border-color: #d6ccc2;
+        }
+        .btn-outline:hover {
+            background: #f0e9e2;
+        }
+
+        .btn svg {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        /* ----- HTML snippet (clean) ----- */
+        .code-section {
+            margin-top: 20px;
+            background: #f6f0ea;
+            border: 1px solid #e5ddd5;
+            border-radius: 4px;
+            padding: 12px 16px;
+        }
+
+        .code-section .code-label {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #6b6259;
+            margin-bottom: 6px;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .code-section .code-label .copy-btn {
+            background: none;
+            border: 1px solid #d6ccc2;
+            border-radius: 4px;
+            font-family: 'Jura', sans-serif;
+            font-weight: 600;
+            font-size: 10px;
+            padding: 3px 14px;
+            cursor: pointer;
+            transition: background 0.15s;
+            color: #3d3732;
+            letter-spacing: 0.04em;
+        }
+
+        .code-section .code-label .copy-btn:hover {
+            background: #e5ddd5;
+        }
+
+        .code-preview-row {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+            background: #1e1c1a;
+            border-radius: 4px;
+            padding: 8px 14px;
+        }
+
+        .code-preview-row .mini-favicon {
+            width: 28px;
+            height: 28px;
+            border-radius: 3px;
+            flex-shrink: 0;
+            background: #2c2a28;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 300;
+            color: #fcf9f6;
+            border: 1px solid #3d3732;
+        }
+
+        #codeSnippet {
+            background: transparent;
+            color: #e8ded5;
+            font-family: 'Jura', 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 300;
+            overflow-x: auto;
+            white-space: nowrap;
+            word-break: keep-all;
+            line-height: 1.6;
+            margin: 0;
+            border: none;
+            width: 100%;
+            min-height: 20px;
+            padding: 2px 0;
+            flex: 1;
+            min-width: 120px;
+        }
+
+        .code-preview-row .truncated {
+            color: #8a8076;
+            font-weight: 300;
+            font-size: 11px;
+        }
+
+        /* ----- symbol gallery / quick picks ----- */
+        .gallery-section {
+            margin-top: 18px;
+            border-top: 1px solid #e8e0d8;
+            padding-top: 16px;
+        }
+
+        .gallery-section .gallery-label {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: #7a7168;
+            margin-bottom: 8px;
+        }
+
+        .gallery-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .gallery-grid .gallery-item {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            background: #f6f0ea;
+            border: 1px solid #e5ddd5;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: border 0.15s, background 0.15s, transform 0.1s;
+            font-weight: 300;
+            user-select: none;
+        }
+
+        .gallery-grid .gallery-item:hover {
+            border-color: #b2a69a;
+            background: #f0e9e2;
+            transform: scale(1.04);
+        }
+
+        .gallery-grid .gallery-item.active {
+            border-color: #2c2a28;
+            background: #e8e0d8;
+        }
+
+        /* ----- responsive ----- */
+        @media (max-width: 680px) {
+            .app {
+                padding: 20px 14px 28px;
+            }
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            .preview-section {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 14px;
+                gap: 12px;
+            }
+            .preview-meta .symbol-big {
+                font-size: 28px;
+            }
+            .btn {
+                flex: 1 1 100%;
+            }
+            .hero h1 {
+                font-size: 24px;
+            }
+            .hero .badge {
+                font-size: 13px;
+            }
+            .code-preview-row {
+                flex-wrap: wrap;
+            }
+            #codeSnippet {
+                font-size: 10px;
+                white-space: pre-wrap;
+                word-break: break-all;
+            }
+        }
+
+        @media (max-width: 420px) {
+            #previewCanvas {
+                width: 64px;
+                height: 64px;
+            }
+            .app {
+                padding: 14px 10px 20px;
+            }
+            .gallery-grid .gallery-item {
+                width: 30px;
+                height: 30px;
+                font-size: 16px;
+            }
+        }
+
+        /* ----- toast ----- */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(80px);
+            background: #2c2a28;
+            color: #f6f0ea;
+            padding: 8px 24px;
+            border-radius: 4px;
+            font-family: 'Jura', sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+            opacity: 0;
+            transition: opacity 0.3s, transform 0.3s;
+            pointer-events: none;
+            z-index: 999;
+            letter-spacing: 0.03em;
+        }
+        .toast.visible {
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app" role="main">
+        <!-- header -->
+        <header class="hero">
+            <div class="hero-left">
+                <h1>Unicon</h1>
+                <span class="badge">Unicode → Favicon</span>
+                <span class="version">v2.1</span>
+            </div>
+        </header>
+        <p class="sub">Paste any symbol, emoji, or glyph. Export as PNG, ICO, or SVG with full transparency.</p>
+
+        <!-- feature strip -->
+        <div class="feature-strip">
+            <span><span class="dot"></span> Live preview</span>
+            <span><span class="dot"></span> Transparent BG</span>
+            <span><span class="dot"></span> PNG · ICO · SVG</span>
+            <span><span class="dot"></span> Contrast check</span>
+            <span><span class="dot"></span> Copy HTML</span>
+        </div>
+
+        <!-- form -->
+        <div class="form-grid">
+            <div class="field full-width">
+                <label for="symbolInput">Symbol</label>
+                <input type="text" id="symbolInput" value="⚡" maxlength="4" placeholder="e.g. ★ ❤ 🐱 ☕" />
+            </div>
+
+            <!-- background + opacity -->
+            <div class="field">
+                <label for="bgColor">Background</label>
+                <div class="flex-row" style="gap:4px;">
+                    <input type="color" id="bgColor" value="#2c2a28" style="flex:0 0 40px; height:36px;" />
+                    <div style="flex:1; min-width:50px;">
+                        <input type="range" id="bgOpacity" min="0" max="100" value="100" style="width:100%;" />
+                        <div class="opacity-label">
+                            <span>Opacity</span>
+                            <span id="bgOpacityLabel">100%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- symbol color -->
+            <div class="field">
+                <label for="fgColor">Symbol Color</label>
+                <input type="color" id="fgColor" value="#fcf9f6" />
+            </div>
+
+            <!-- size + shape -->
+            <div class="field">
+                <label for="iconSize">Size</label>
+                <select id="iconSize">
+                    <option value="16">16 × 16</option>
+                    <option value="32">32 × 32</option>
+                    <option value="48">48 × 48</option>
+                    <option value="64" selected>64 × 64</option>
+                    <option value="128">128 × 128</option>
+                    <option value="256">256 × 256</option>
+                    <option value="512">512 × 512</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="shapeSelect">Shape</label>
+                <select id="shapeSelect">
+                    <option value="square">Square</option>
+                    <option value="rounded" selected>Rounded</option>
+                    <option value="circle">Circle</option>
+                </select>
+            </div>
+
+            <!-- font size + transparent toggle -->
+            <div class="field">
+                <label>Font size <span class="hint">%</span></label>
+                <div class="range-row">
+                    <input type="range" id="fontSizeAdjust" min="25" max="90" value="68" style="flex:1;" />
+                    <span id="fontSizeLabel">68%</span>
+                </div>
+            </div>
+
+            <div class="field" style="justify-content:flex-end;">
+                <label class="checkbox-wrap">
+                    <input type="checkbox" id="transparentBg" />
+                    Transparent
+                </label>
+            </div>
+
+            <!-- color presets -->
+            <div class="field full-width" style="margin-top:2px;">
+                <div class="preset-row">
+                    <span class="preset-label">Presets</span>
+                    <span class="preset-swatch" style="background:#2c2a28; border-color:#2c2a28;" data-bg="#2c2a28" data-fg="#fcf9f6"></span>
+                    <span class="preset-swatch" style="background:#1a2e3f; border-color:#1a2e3f;" data-bg="#1a2e3f" data-fg="#f0e9e2"></span>
+                    <span class="preset-swatch" style="background:#4f3b2c; border-color:#4f3b2c;" data-bg="#4f3b2c" data-fg="#fcf9f6"></span>
+                    <span class="preset-swatch" style="background:#2c4f3b; border-color:#2c4f3b;" data-bg="#2c4f3b" data-fg="#fcf9f6"></span>
+                    <span class="preset-swatch" style="background:#fcf9f6; border-color:#d6ccc2;" data-bg="#fcf9f6" data-fg="#2c2a28"></span>
+                    <span class="preset-swatch" style="background:#f5e6d3; border-color:#d6ccc2;" data-bg="#f5e6d3" data-fg="#3d2a1e"></span>
+                    <span class="preset-swatch" style="background:#e8d5c4; border-color:#d6ccc2;" data-bg="#e8d5c4" data-fg="#2c2a28"></span>
+                    <span class="preset-swatch" style="background:transparent; border-color:#d6ccc2; border-style:dashed;" data-bg="transparent" data-fg="#2c2a28" data-transparent="true"></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- preview -->
+        <div class="preview-section">
+            <div class="preview-canvas-wrap" id="canvasWrap">
+                <canvas id="previewCanvas" width="128" height="128"></canvas>
+            </div>
+            <div class="preview-meta">
+                <span class="symbol-big" id="symbolDisplay">⚡</span>
+                <span class="meta-detail">
+                    <span id="sizeDisplay">64</span>×<span id="sizeDisplay2">64</span>
+                    &nbsp;·&nbsp; <span id="shapeDisplay">rounded</span>
+                    &nbsp;·&nbsp; <span id="opacityDisplay">100</span>% bg
+                </span>
+                <span class="warning" id="contrastWarning">⚠️ Low contrast — symbol may be hard to see</span>
+            </div>
+        </div>
+
+        <!-- actions -->
+        <div class="actions">
+            <button class="btn btn-primary" id="downloadPngBtn" aria-label="Download PNG">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                PNG
+            </button>
+            <button class="btn btn-success" id="downloadIcoBtn" aria-label="Download ICO">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                ICO
+            </button>
+            <button class="btn btn-outline" id="downloadSvgBtn" aria-label="Download SVG">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4v16h16"/><polyline points="4 20 8 12 12 16 18 6"/></svg>
+                SVG
+            </button>
+            <button class="btn btn-outline" id="resetBtn">↺ Reset</button>
+        </div>
+
+        <!-- HTML snippet (clean) -->
+        <div class="code-section">
+            <div class="code-label">
+                <span>Embed HTML</span>
+                <button class="copy-btn" id="copyCodeBtn">Copy</button>
+            </div>
+            <div class="code-preview-row">
+                <span class="mini-favicon" id="miniFavicon">⚡</span>
+                <code id="codeSnippet">&lt;link rel="icon" href="data:image/png;base64,…" /&gt;</code>
+                <span class="truncated" id="truncatedHint">(data URL truncated)</span>
+            </div>
+        </div>
+
+        <!-- symbol gallery -->
+        <div class="gallery-section">
+            <div class="gallery-label">Quick symbols</div>
+            <div class="gallery-grid" id="galleryGrid">
+                <!-- filled by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- toast -->
+    <div class="toast" id="toast"></div>
+
+    <script>
+        (function() {
+            'use strict';
+
+            // ----- DOM refs -----
+            const symbolInput = document.getElementById('symbolInput');
+            const bgColor = document.getElementById('bgColor');
+            const fgColor = document.getElementById('fgColor');
+            const bgOpacity = document.getElementById('bgOpacity');
+            const bgOpacityLabel = document.getElementById('bgOpacityLabel');
+            const iconSize = document.getElementById('iconSize');
+            const shapeSelect = document.getElementById('shapeSelect');
+            const fontSizeAdjust = document.getElementById('fontSizeAdjust');
+            const fontSizeLabel = document.getElementById('fontSizeLabel');
+            const transparentBg = document.getElementById('transparentBg');
+            const previewCanvas = document.getElementById('previewCanvas');
+            const canvasWrap = document.getElementById('canvasWrap');
+            const symbolDisplay = document.getElementById('symbolDisplay');
+            const sizeDisplay = document.getElementById('sizeDisplay');
+            const sizeDisplay2 = document.getElementById('sizeDisplay2');
+            const shapeDisplay = document.getElementById('shapeDisplay');
+            const opacityDisplay = document.getElementById('opacityDisplay');
+            const contrastWarning = document.getElementById('contrastWarning');
+            const codeSnippet = document.getElementById('codeSnippet');
+            const miniFavicon = document.getElementById('miniFavicon');
+            const truncatedHint = document.getElementById('truncatedHint');
+            const downloadPngBtn = document.getElementById('downloadPngBtn');
+            const downloadIcoBtn = document.getElementById('downloadIcoBtn');
+            const downloadSvgBtn = document.getElementById('downloadSvgBtn');
+            const resetBtn = document.getElementById('resetBtn');
+            const copyCodeBtn = document.getElementById('copyCodeBtn');
+            const galleryGrid = document.getElementById('galleryGrid');
+            const toast = document.getElementById('toast');
+
+            let toastTimer = null;
+
+            // ----- quick symbols -----
+            const quickSymbols = ['⚡', '★', '❤️', '🐱', '☕', '🔥', '💎', '✨', '🚀', '🌈', '🌊', '🎵', '🍕', '⚽', '🎨', '📱', '💻', '🖤', '☯', '🕊️', '🌿', '🧊', '🏔️', '🌙'];
+
+            // ----- helpers -----
+            function showToast(msg) {
+                if (toastTimer) clearTimeout(toastTimer);
+                toast.textContent = msg;
+                toast.classList.add('visible');
+                toastTimer = setTimeout(() => {
+                    toast.classList.remove('visible');
+                    toastTimer = null;
+                }, 2000);
+            }
+
+            function getShape(shapeVal) {
+                if (shapeVal === 'circle') return 'circle';
+                if (shapeVal === 'rounded') return 'rounded';
+                return 'square';
+            }
+
+            function toggleBgControls(disable) {
+                bgColor.disabled = disable;
+                bgOpacity.disabled = disable;
+                const bgField = bgColor.closest('.field');
+                if (bgField) {
+                    const label = bgField.querySelector('label');
+                    if (label) label.style.opacity = disable ? '0.5' : '1';
+                }
+                if (disable) {
+                    canvasWrap.classList.add('transparent-mode');
+                } else {
+                    canvasWrap.classList.remove('transparent-mode');
+                }
+            }
+
+            // ----- contrast check -----
+            function hexToRgb(hex) {
+                if (hex === 'transparent') return { r: 255, g: 255, b: 255, a: 0 };
+                const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+                return result ? {
+                    r: parseInt(result[1], 16),
+                    g: parseInt(result[2], 16),
+                    b: parseInt(result[3], 16)
+                } : { r: 255, g: 255, b: 255 };
+            }
+
+            function luminance(r, g, b) {
+                const [rs, gs, bs] = [r, g, b].map(c => {
+                    c = c / 255;
+                    return c <= 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
+                });
+                return 0.2126 * rs + 0.7152 * gs + 0.0722 * bs;
+            }
+
+            function contrastRatio(color1, color2) {
+                const l1 = luminance(color1.r, color1.g, color1.b);
+                const l2 = luminance(color2.r, color2.g, color2.b);
+                const lighter = Math.max(l1, l2);
+                const darker = Math.min(l1, l2);
+                return (lighter + 0.05) / (darker + 0.05);
+            }
+
+            function checkContrast(bgHex, fgHex) {
+                if (bgHex === 'transparent') return true;
+                const bg = hexToRgb(bgHex);
+                const fg = hexToRgb(fgHex);
+                const ratio = contrastRatio(bg, fg);
+                return ratio >= 3.0;
+            }
+
+            // ----- render (pixel-perfect, no offset) -----
+            function renderIcon() {
+                const symbol = symbolInput.value.trim() || '⚡';
+                let bg = bgColor.value || '#2c2a28';
+                const fg = fgColor.value || '#fcf9f6';
+                const size = parseInt(iconSize.value, 10) || 64;
+                const shape = getShape(shapeSelect.value);
+                const fontSizePercent = parseInt(fontSizeAdjust.value, 10) || 68;
+                let opacityVal = parseInt(bgOpacity.value, 10);
+                const isTransparent = transparentBg.checked;
+
+                if (isTransparent) {
+                    opacityVal = 0;
+                    bgOpacity.value = 0;
+                    bgOpacityLabel.textContent = '0%';
+                    bg = 'transparent';
+                }
+                const bgAlpha = Math.min(1, opacityVal / 100);
+
+                // Update meta
+                symbolDisplay.textContent = symbol || '?';
+                sizeDisplay.textContent = size;
+                sizeDisplay2.textContent = size;
+                shapeDisplay.textContent = getShape(shapeSelect.value);
+                opacityDisplay.textContent = Math.round(bgAlpha * 100);
+                miniFavicon.textContent = symbol || '?';
+
+                // Contrast warning
+                const hasContrast = checkContrast(bg, fg);
+                if (!hasContrast && !isTransparent) {
+                    contrastWarning.classList.add('visible');
+                } else {
+                    contrastWarning.classList.remove('visible');
+                }
+
+                // Draw
+                const canvas = previewCanvas;
+                const ctx = canvas.getContext('2d');
+                const drawSize = size;
+                canvas.width = drawSize;
+                canvas.height = drawSize;
+
+                ctx.clearRect(0, 0, drawSize, drawSize);
+
+                const radius = (shape === 'circle') ? drawSize / 2 :
+                    (shape === 'rounded') ? Math.min(drawSize * 0.18, 24) : 0;
+
+                // Draw background (only if not fully transparent)
+                if (bgAlpha > 0 && !isTransparent) {
+                    ctx.save();
+                    ctx.beginPath();
+                    if (shape === 'circle') {
+                        ctx.arc(drawSize / 2, drawSize / 2, drawSize / 2, 0, Math.PI * 2);
+                    } else if (shape === 'rounded') {
+                        const r = Math.min(drawSize * 0.18, 24);
+                        ctx.moveTo(r, 0);
+                        ctx.lineTo(drawSize - r, 0);
+                        ctx.quadraticCurveTo(drawSize, 0, drawSize, r);
+                        ctx.lineTo(drawSize, drawSize - r);
+                        ctx.quadraticCurveTo(drawSize, drawSize, drawSize - r, drawSize);
+                        ctx.lineTo(r, drawSize);
+                        ctx.quadraticCurveTo(0, drawSize, 0, drawSize - r);
+                        ctx.lineTo(0, r);
+                        ctx.quadraticCurveTo(0, 0, r, 0);
+                    } else {
+                        ctx.rect(0, 0, drawSize, drawSize);
+                    }
+                    ctx.closePath();
+                    ctx.fillStyle = bgColor.value;
+                    ctx.globalAlpha = bgAlpha;
+                    ctx.fill();
+                    ctx.globalAlpha = 1.0;
+                    ctx.restore();
+                }
+
+                // Draw symbol – pixel‑snapped and no manual offset
+                const fontSize = Math.round(drawSize * (fontSizePercent / 100));
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillStyle = fg;
+                ctx.font = `normal ${fontSize}px "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", "Helvetica Neue", Arial, sans-serif`;
+                // 🔥 FIX: round coordinates to avoid sub‑pixel blur, remove +2 offset
+                const cx = Math.round(drawSize / 2);
+                const cy = Math.round(drawSize / 2);
+                ctx.fillText(symbol || '?', cx, cy);
+
+                updateCodeSnippet(symbol, fg);
+                return canvas;
+            }
+
+            // ----- update code snippet (clean, with mini preview) -----
+            function updateCodeSnippet(symbol, fg) {
+                const dataUrl = previewCanvas.toDataURL('image/png');
+                const truncated = dataUrl.length > 120 ? dataUrl.slice(0, 100) + '…' + dataUrl.slice(-20) : dataUrl;
+                const fullHtml = `<link rel="icon" href="${dataUrl}" />`;
+                codeSnippet.textContent = fullHtml;
+                miniFavicon.style.color = fg || '#fcf9f6';
+                truncatedHint.style.display = dataUrl.length > 120 ? 'inline' : 'none';
+            }
+
+            // ----- download helpers (with same pixel‑perfect logic) -----
+            function getCanvasDataURL(sizeOverride) {
+                const symbol = symbolInput.value.trim() || '⚡';
+                const bg = bgColor.value || '#2c2a28';
+                const fg = fgColor.value || '#fcf9f6';
+                const shape = getShape(shapeSelect.value);
+                const fontSizePercent = parseInt(fontSizeAdjust.value, 10) || 68;
+                let opacityVal = parseInt(bgOpacity.value, 10);
+                const isTransparent = transparentBg.checked;
+                if (isTransparent) opacityVal = 0;
+                const bgAlpha = Math.min(1, opacityVal / 100);
+                const drawSize = sizeOverride || parseInt(iconSize.value, 10) || 64;
+
+                const offscreen = document.createElement('canvas');
+                offscreen.width = drawSize;
+                offscreen.height = drawSize;
+                const ctx = offscreen.getContext('2d');
+
+                ctx.clearRect(0, 0, drawSize, drawSize);
+
+                const radius = (shape === 'circle') ? drawSize / 2 :
+                    (shape === 'rounded') ? Math.min(drawSize * 0.18, 24) : 0;
+
+                if (bgAlpha > 0 && !isTransparent) {
+                    ctx.save();
+                    ctx.beginPath();
+                    if (shape === 'circle') {
+                        ctx.arc(drawSize / 2, drawSize / 2, drawSize / 2, 0, Math.PI * 2);
+                    } else if (shape === 'rounded') {
+                        const r = Math.min(drawSize * 0.18, 24);
+                        ctx.moveTo(r, 0);
+                        ctx.lineTo(drawSize - r, 0);
+                        ctx.quadraticCurveTo(drawSize, 0, drawSize, r);
+                        ctx.lineTo(drawSize, drawSize - r);
+                        ctx.quadraticCurveTo(drawSize, drawSize, drawSize - r, drawSize);
+                        ctx.lineTo(r, drawSize);
+                        ctx.quadraticCurveTo(0, drawSize, 0, drawSize - r);
+                        ctx.lineTo(0, r);
+                        ctx.quadraticCurveTo(0, 0, r, 0);
+                    } else {
+                        ctx.rect(0, 0, drawSize, drawSize);
+                    }
+                    ctx.closePath();
+                    ctx.fillStyle = bg;
+                    ctx.globalAlpha = bgAlpha;
+                    ctx.fill();
+                    ctx.globalAlpha = 1.0;
+                    ctx.restore();
+                }
+
+                const fontSize = Math.round(drawSize * (fontSizePercent / 100));
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillStyle = fg;
+                ctx.font = `normal ${fontSize}px "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", "Helvetica Neue", Arial, sans-serif`;
+                // 🔥 FIX: rounded coords, no offset
+                const cx = Math.round(drawSize / 2);
+                const cy = Math.round(drawSize / 2);
+                ctx.fillText(symbol || '?', cx, cy);
+
+                return offscreen;
+            }
+
+            // ----- SVG export -----
+            function downloadSVG() {
+                const symbol = symbolInput.value.trim() || '⚡';
+                const bg = bgColor.value || '#2c2a28';
+                const fg = fgColor.value || '#fcf9f6';
+                const shape = getShape(shapeSelect.value);
+                const size = parseInt(iconSize.value, 10) || 64;
+                const fontSizePercent = parseInt(fontSizeAdjust.value, 10) || 68;
+                const isTransparent = transparentBg.checked;
+                const bgAlpha = isTransparent ? 0 : parseInt(bgOpacity.value, 10) / 100;
+                const fontSize = Math.round(size * (fontSizePercent / 100));
+
+                let shapePath = '';
+                const r = Math.min(size * 0.18, 24);
+                if (shape === 'circle') {
+                    shapePath =
+                    `<circle cx="${size/2}" cy="${size/2}" r="${size/2}" fill="${bg}" fill-opacity="${bgAlpha}" />`;
+                } else if (shape === 'rounded') {
+                    shapePath =
+                        `<rect x="0" y="0" width="${size}" height="${size}" rx="${r}" ry="${r}" fill="${bg}" fill-opacity="${bgAlpha}" />`;
+                } else {
+                    shapePath =
+                    `<rect x="0" y="0" width="${size}" height="${size}" fill="${bg}" fill-opacity="${bgAlpha}" />`;
+                }
+
+                const bgSvg = isTransparent ? '' : shapePath;
+
+                const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="${size}" height="${size}" viewBox="0 0 ${size} ${size}">
+              ${bgSvg}
+              <text x="${size/2}" y="${size/2}" text-anchor="middle" dominant-baseline="central" font-family="'Segoe UI Emoji','Apple Color Emoji','Noto Color Emoji',sans-serif" font-size="${fontSize}" fill="${fg}" font-weight="normal">${symbol}</text>
+            </svg>`;
+
+                const blob = new Blob([svg], { type: 'image/svg+xml' });
+                const link = document.createElement('a');
+                link.download = `favicon-${size}.svg`;
+                link.href = URL.createObjectURL(blob);
+                link.click();
+                setTimeout(() => URL.revokeObjectURL(link.href), 5000);
+                showToast(`SVG downloaded (${size}×${size})`);
+            }
+
+            function downloadPNG() {
+                const size = parseInt(iconSize.value, 10) || 64;
+                const canvas = getCanvasDataURL(size);
+                const link = document.createElement('a');
+                link.download = `favicon-${size}.png`;
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+                showToast(`PNG downloaded (${size}×${size})`);
+            }
+
+            function downloadICO() {
+                const sizes = [16, 32, 48, 64, 128, 256];
+                const images = [];
+                let totalSize = 0;
+
+                for (const sz of sizes) {
+                    const canvas = getCanvasDataURL(sz);
+                    const dataUrl = canvas.toDataURL('image/png');
+                    const binary = atob(dataUrl.split(',')[1]);
+                    const len = binary.length;
+                    const bytes = new Uint8Array(len);
+                    for (let i = 0; i < len; i++) {
+                        bytes[i] = binary.charCodeAt(i);
+                    }
+                    images.push({
+                        width: sz,
+                        height: sz,
+                        data: bytes.buffer,
+                        size: len,
+                    });
+                    totalSize += len;
+                }
+
+                const headerSize = 6 + images.length * 16;
+                let offset = headerSize;
+                const icoBuffer = new ArrayBuffer(headerSize + totalSize);
+                const icoView = new DataView(icoBuffer);
+                const icoBytes = new Uint8Array(icoBuffer);
+
+                icoView.setUint16(0, 0, true);
+                icoView.setUint16(2, 1, true);
+                icoView.setUint16(4, images.length, true);
+
+                let pos = 6;
+                for (let i = 0; i < images.length; i++) {
+                    const img = images[i];
+                    const w = img.width === 256 ? 0 : img.width;
+                    const h = img.height === 256 ? 0 : img.height;
+                    icoView.setUint8(pos, w);
+                    icoView.setUint8(pos + 1, h);
+                    icoView.setUint8(pos + 2, 0);
+                    icoView.setUint8(pos + 3, 0);
+                    icoView.setUint16(pos + 4, 1, true);
+                    icoView.setUint16(pos + 6, 32, true);
+                    icoView.setUint32(pos + 8, img.size, true);
+                    icoView.setUint32(pos + 12, offset, true);
+                    pos += 16;
+                    offset += img.size;
+                }
+
+                let dataPos = headerSize;
+                for (const img of images) {
+                    const bytes = new Uint8Array(img.data);
+                    icoBytes.set(bytes, dataPos);
+                    dataPos += bytes.length;
+                }
+
+                const blob = new Blob([icoBuffer], { type: 'image/x-icon' });
+                const link = document.createElement('a');
+                link.download = 'favicon.ico';
+                link.href = URL.createObjectURL(blob);
+                link.click();
+                setTimeout(() => URL.revokeObjectURL(link.href), 5000);
+                showToast(`ICO downloaded (${sizes.join(', ')})`);
+            }
+
+            // ----- reset -----
+            function resetDefaults() {
+                symbolInput.value = '⚡';
+                bgColor.value = '#2c2a28';
+                fgColor.value = '#fcf9f6';
+                bgOpacity.value = '100';
+                bgOpacityLabel.textContent = '100%';
+                transparentBg.checked = false;
+                iconSize.value = '64';
+                shapeSelect.value = 'rounded';
+                fontSizeAdjust.value = '68';
+                fontSizeLabel.textContent = '68%';
+                toggleBgControls(false);
+                renderIcon();
+                showToast('Reset');
+            }
+
+            // ----- copy -----
+            function copyCode() {
+                const text = codeSnippet.textContent;
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(text).then(() => {
+                        showToast('Copied!');
+                    }).catch(() => {
+                        fallbackCopy(text);
+                    });
+                } else {
+                    fallbackCopy(text);
+                }
+            }
+
+            function fallbackCopy(text) {
+                const ta = document.createElement('textarea');
+                ta.value = text;
+                ta.style.position = 'fixed';
+                ta.style.opacity = '0';
+                document.body.appendChild(ta);
+                ta.select();
+                try {
+                    document.execCommand('copy');
+                    showToast('Copied!');
+                } catch (_) {
+                    showToast('Could not copy');
+                }
+                document.body.removeChild(ta);
+            }
+
+            // ----- presets -----
+            function applyPreset(bg, fg, transparent) {
+                if (transparent) {
+                    transparentBg.checked = true;
+                    bgColor.value = '#2c2a28';
+                    toggleBgControls(true);
+                    bgOpacity.value = 0;
+                    bgOpacityLabel.textContent = '0%';
+                } else {
+                    transparentBg.checked = false;
+                    bgColor.value = bg;
+                    fgColor.value = fg;
+                    toggleBgControls(false);
+                    bgOpacity.value = 100;
+                    bgOpacityLabel.textContent = '100%';
+                }
+                renderIcon();
+            }
+
+            // ----- build gallery -----
+            function buildGallery() {
+                galleryGrid.innerHTML = '';
+                quickSymbols.forEach(sym => {
+                    const el = document.createElement('span');
+                    el.className = 'gallery-item';
+                    el.textContent = sym;
+                    el.dataset.symbol = sym;
+                    el.addEventListener('click', function() {
+                        symbolInput.value = sym;
+                        document.querySelectorAll('.gallery-item').forEach(e => e.classList.remove('active'));
+                        this.classList.add('active');
+                        renderIcon();
+                        showToast(`Selected ${sym}`);
+                    });
+                    if (sym === symbolInput.value.trim()) {
+                        el.classList.add('active');
+                    }
+                    galleryGrid.appendChild(el);
+                });
+            }
+
+            // ----- events -----
+            function onInputChange() { renderIcon(); }
+
+            symbolInput.addEventListener('input', onInputChange);
+            bgColor.addEventListener('input', onInputChange);
+            fgColor.addEventListener('input', onInputChange);
+
+            bgOpacity.addEventListener('input', function() {
+                if (transparentBg.checked) {
+                    transparentBg.checked = false;
+                    toggleBgControls(false);
+                }
+                bgOpacityLabel.textContent = this.value + '%';
+                renderIcon();
+            });
+
+            transparentBg.addEventListener('change', function() {
+                const isChecked = this.checked;
+                toggleBgControls(isChecked);
+                if (isChecked) {
+                    bgOpacity.value = 0;
+                    bgOpacityLabel.textContent = '0%';
+                } else {
+                    bgOpacity.value = 100;
+                    bgOpacityLabel.textContent = '100%';
+                }
+                renderIcon();
+            });
+
+            iconSize.addEventListener('change', onInputChange);
+            shapeSelect.addEventListener('change', onInputChange);
+            fontSizeAdjust.addEventListener('input', function() {
+                fontSizeLabel.textContent = this.value + '%';
+                renderIcon();
+            });
+
+            downloadPngBtn.addEventListener('click', downloadPNG);
+            downloadIcoBtn.addEventListener('click', downloadICO);
+            downloadSvgBtn.addEventListener('click', downloadSVG);
+            resetBtn.addEventListener('click', resetDefaults);
+            copyCodeBtn.addEventListener('click', copyCode);
+
+            // presets
+            document.querySelectorAll('.preset-swatch').forEach(sw => {
+                sw.addEventListener('click', function() {
+                    const bg = this.dataset.bg;
+                    const fg = this.dataset.fg;
+                    const transparent = this.dataset.transparent === 'true';
+                    applyPreset(bg, fg, transparent);
+                    document.querySelectorAll('.preset-swatch').forEach(e => e.classList.remove('active'));
+                    this.classList.add('active');
+                });
+            });
+
+            // init
+            toggleBgControls(false);
+            buildGallery();
+            renderIcon();
+            symbolInput.addEventListener('paste', function() { setTimeout(renderIcon, 10); });
+
+            document.querySelector('.preset-swatch[data-bg="#2c2a28"]')?.classList.add('active');
+
+        })();
+    </script>
+</body>
+</html>

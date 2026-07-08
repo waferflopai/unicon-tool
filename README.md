@@ -53,5 +53,3 @@ The preview updates instantly, and a contrast warning appears if the chosen colo
 - **Vanilla JavaScript** – no external libraries, all logic self‑contained
 
 ---
-
-## 📦 File Structure

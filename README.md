@@ -7,7 +7,7 @@ Download as PNG, ICO, or SVG with full transparency support. Live preview, contr
 
 ---
 
-## ✨ Features
+## Features
 
 - **Live preview** – See your favicon update as you type
 - **Multiple export formats** – PNG, ICO (multi‑size), and SVG
@@ -20,7 +20,7 @@ Download as PNG, ICO, or SVG with full transparency support. Live preview, contr
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 Unicon is a **single HTML file** – no build tools, no dependencies.  
 Just open `index.html` in your browser and start converting.
@@ -34,7 +34,7 @@ The tool works equally well as a static page. Upload the file to any web server 
 
 ---
 
-## 🧩 Usage
+## Usage
 
 1. **Enter a symbol** – type or paste any Unicode character (emoji, glyph, or letter).  
 2. **Customize** – choose background, symbol colour, size, shape, and font scale.  
@@ -46,7 +46,7 @@ The preview updates instantly, and a contrast warning appears if the chosen colo
 
 ---
 
-## 🛠️ Built With
+## Built With
 
 - **HTML5** – semantic structure, canvas rendering
 - **CSS3** – custom properties, flexible layout, responsive design

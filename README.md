@@ -3,6 +3,8 @@
 **Convert any Unicode symbol, emoji, or glyph into a custom favicon.**  
 Download as PNG, ICO, or SVG with full transparency support. Live preview, contrast check, and ready-to-use HTML snippet included.
 
+[![Live Demo](https://img.shields.io/badge/Live-Demo-6A0DAD?style=for-the-badge&logo=vercel&logoColor=white)](https://unicon-tool.vercel.app/)
+
 ![Version](https://img.shields.io/badge/version-2.1-blue) ![License](https://img.shields.io/badge/license-MIT-green)
 
 ---
@@ -32,6 +34,9 @@ Just open `index.html` in your browser and start converting.
 ### Option 2: Host it yourself
 The tool works equally well as a static page. Upload the file to any web server or use services like GitHub Pages.
 
+### Option 3: Try the live demo
+Head over to **[https://unicon-tool.vercel.app/](https://unicon-tool.vercel.app/)** – no installation required.
+
 ---
 
 ## Usage
@@ -53,3 +58,5 @@ The preview updates instantly, and a contrast warning appears if the chosen colo
 - **Vanilla JavaScript** – no external libraries, all logic self‑contained
 
 ---
+
+[![Live Demo](https://img.shields.io/badge/🚀%20Try%20it%20now-Unicon%20Live-6A0DAD?style=for-the-badge)](https://unicon-tool.vercel.app/)
